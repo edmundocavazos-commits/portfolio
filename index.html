@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edmundo Cavazos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1220;
+    --navy-2:#111B2E;
+    --blue:#197CBB;
+    --blue-bright:#3FA9E0;
+    --muted:#8A93A6;
+    --muted-dark:#5C6577;
+    --line: rgba(255,255,255,0.09);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif; background:var(--navy); color:#EDEFF3; overflow-x:hidden;}
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  ::selection{background:var(--blue); color:#fff;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;} }
+
+  .rail{position:fixed; right:28px; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:16px;}
+  .rail a{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted); font-size:11px; letter-spacing:0.05em;}
+  .rail a .dot{width:7px;height:7px;border-radius:50%; background:rgba(255,255,255,0.25); transition:all .3s ease;}
+  .rail a.active .dot{background:var(--blue-bright); box-shadow:0 0 0 4px rgba(63,169,224,0.18);}
+  .rail a.active{color:#EDEFF3;}
+  .rail a span.label{opacity:0; transform:translateX(6px); transition:all .25s ease; white-space:nowrap;}
+  .rail a:hover span.label{opacity:1; transform:translateX(0);}
+  @media (max-width:900px){ .rail{display:none;} }
+
+  .hero{min-height:100vh; position:relative; display:flex; flex-direction:column; justify-content:center; padding:0 8vw; overflow:hidden;}
+  #nodeCanvas{position:absolute; inset:0; width:100%; height:100%; opacity:0.5;}
+  .hero-eyebrow{font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--blue-bright); margin-bottom:22px; position:relative; z-index:2;}
+  .hero h1{font-size:clamp(48px, 9vw, 122px); font-weight:600; line-height:0.98; letter-spacing:-0.02em; position:relative; z-index:2;}
+  .hero p.role{margin-top:26px; font-size:clamp(16px,2vw,20px); color:var(--muted); max-width:620px; line-height:1.6; position:relative; z-index:2;}
+  .scroll-cue{position:absolute; bottom:48px; left:8vw; font-size:11px; color:var(--muted-dark); letter-spacing:0.1em; display:flex; align-items:center; gap:10px;}
+  .scroll-cue .bar{width:1px;height:36px;background:linear-gradient(var(--muted-dark),transparent); animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+  section{position:relative; padding:150px 8vw;}
+  .chapter-num{font-size:13px; color:var(--blue-bright); margin-bottom:18px; display:block;}
+  h2.title{font-size:clamp(30px,3.6vw,50px); font-weight:600; letter-spacing:-0.01em; max-width:780px; line-height:1.1; margin-bottom:24px;}
+  .lede{font-size:18px; line-height:1.7; color:var(--muted); max-width:620px;}
+
+  .reveal{opacity:0; transform:translateY(28px); transition:all .8s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* stack / tools */
+  .stack-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:56px;}
+  .stack-chip{
+    display:flex; align-items:center; gap:10px;
+    border:1px solid var(--line); border-radius:100px; padding:11px 20px 11px 14px;
+    font-size:13.5px; color:#EDEFF3; background:var(--navy-2);
+  }
+  .stack-chip .mark{
+    width:26px;height:26px;border-radius:7px; display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:10.5px; color:#0B1220;
+  }
+
+  /* project grid */
+  .filters{display:flex; gap:10px; flex-wrap:wrap; margin:48px 0 8px;}
+  .filter-btn{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.04em;
+    padding:8px 16px; border-radius:100px; border:1px solid var(--line); background:transparent;
+    color:var(--muted); cursor:pointer; transition:all .25s ease;
+  }
+  .filter-btn.active, .filter-btn:hover{color:#EDEFF3; border-color:var(--blue-bright); background:rgba(63,169,224,0.08);}
+
+  .video-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:28px; margin-top:40px;}
+  .vcard{background:var(--navy-2); border:1px solid var(--line); border-radius:14px; overflow:hidden; transition:transform .35s ease, border-color .35s ease;}
+  .vcard:hover{transform:translateY(-6px); border-color:rgba(63,169,224,0.4);}
+  .vthumb{aspect-ratio:16/9; background:linear-gradient(135deg,#16243C,#0B1220); position:relative; overflow:hidden;}
+  .vthumb img{width:100%;height:100%;object-fit:cover; display:block;}
+  .vthumb .play{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;}
+  .vthumb .play svg{width:44px;height:44px; opacity:0.9; filter:drop-shadow(0 4px 14px rgba(0,0,0,0.4));}
+  .vbody{padding:20px 22px 24px;}
+  .vbody .meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+  .vbody .date{font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--blue-bright); font-family:'JetBrains Mono',monospace;}
+  .vbody h4{font-size:17px; font-weight:600; margin-bottom:8px; font-family:'Space Grotesk',sans-serif;}
+  .vbody p{font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:14px;}
+  .tool-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
+  .tool-tags span{font-size:10px; padding:4px 10px; border:1px solid var(--line); border-radius:100px; color:var(--muted); font-family:'JetBrains Mono',monospace;}
+  .vbody a.watch{font-size:12px; color:#EDEFF3; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:2px;}
+  .vbody a.watch:hover{border-color:var(--blue-bright); color:var(--blue-bright);}
+
+  footer{padding:40px 8vw; font-size:12px; color:var(--muted-dark); border-top:1px solid var(--line);}
+</style>
+</head>
+<body>
+
+<nav class="rail">
+  <a href="#ch0" data-idx="0"><span class="dot"></span><span class="label">Inicio</span></a>
+  <a href="#ch1" data-idx="1"><span class="dot"></span><span class="label">Stack</span></a>
+  <a href="#ch2" data-idx="2"><span class="dot"></span><span class="label">Trabajo</span></a>
+</nav>
+
+<section class="hero" id="ch0">
+  <canvas id="nodeCanvas"></canvas>
+  <div class="hero-eyebrow mono">AI Creative &amp; Video Producer — Reynosa, MX</div>
+  <h1>Edmundo<br>Cavazos</h1>
+  <p class="role">Genero, dirijo y edito video con IA de principio a fin — de un prompt a una pieza terminada. Este es un muestrario de mi mejor trabajo.</p>
+  <div class="scroll-cue"><div class="bar"></div>Scroll</div>
+</section>
+
+<section id="ch1">
+  <span class="chapter-num mono">Stack</span>
+  <h2 class="title reveal">De la generación IA a la edición final.</h2>
+  <p class="lede reveal">Un mismo pipeline, de punta a punta: generación con modelos de IA, ensamblaje y post-producción profesional.</p>
+  <div class="stack-row reveal">
+    <div class="stack-chip"><div class="mark" style="background:#3FA9E0;">Gr</div>Grok</div>
+    <div class="stack-chip"><div class="mark" style="background:#E8860A;">Kl</div>Kling AI</div>
+    <div class="stack-chip"><div class="mark" style="background:#9B6BD9;">Hf</div>Higgsfield</div>
+    <div class="stack-chip"><div class="mark" style="background:#9999FF;">Ae</div>Adobe After Effects</div>
+    <div class="stack-chip"><div class="mark" style="background:#00005B;">Pr</div>Adobe Premiere Pro</div>
+    <div class="stack-chip"><div class="mark" style="background:#31A8FF;">Ps</div>Adobe Photoshop</div>
+    <div class="stack-chip"><div class="mark" style="background:#B4A7D6;">Me</div>Adobe Media Encoder</div>
+  </div>
+</section>
+
+<section id="ch2">
+  <span class="chapter-num mono">Trabajo</span>
+  <h2 class="title reveal">Piezas producidas con IA, editadas a mano.</h2>
+  <p class="lede reveal">Cada pieza parte de un prompt y termina en Premiere. Selección con fecha y herramientas usadas.</p>
+
+  <div class="video-grid reveal" id="videoGrid"></div>
+</section>
+
+<footer>Edmundo Cavazos — 2025–2026</footer>
+
+<script>
+const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }); },{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const sections = ['ch0','ch1','ch2'];
+const railLinks = document.querySelectorAll('.rail a');
+const secObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const idx = sections.indexOf(entry.target.id);
+      railLinks.forEach(a=>a.classList.remove('active'));
+      if(railLinks[idx]) railLinks[idx].classList.add('active');
+    }
+  });
+},{threshold:0.5});
+sections.forEach(id=>{ const el=document.getElementById(id); if(el) secObserver.observe(el); });
+
+const canvas = document.getElementById('nodeCanvas');
+const ctx = canvas.getContext('2d');
+let W,H,nodes=[];
+function resize(){ W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+window.addEventListener('resize', resize); resize();
+for(let i=0;i<34;i++){ nodes.push({x:Math.random()*W,y:Math.random()*H, vy:0.15+Math.random()*0.25, r:1+Math.random()*1.6}); }
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  nodes.forEach(n=>{ n.y -= n.vy; if(n.y < -10){ n.y = H+10; n.x = Math.random()*W; } });
+  for(let i=0;i<nodes.length;i++){ for(let j=i+1;j<nodes.length;j++){
+    const a=nodes[i], b=nodes[j]; const d = Math.hypot(a.x-b.x, a.y-b.y);
+    if(d < 130){ ctx.strokeStyle = `rgba(63,169,224,${0.14*(1-d/130)})`; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
+  }}
+  nodes.forEach(n=>{ ctx.fillStyle = 'rgba(63,169,224,0.55)'; ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill(); });
+  requestAnimationFrame(draw);
+}
+draw();
+
+// Project data — dates are the file's actual creation dates
+const videos = [
+  { id:"1g71w7IIPJSTrrZxCRPwJsrYBVtquyzTQ", date:"26 Jun 2026", title:"Showcase — pieza integral", desc:"Video showcase de producto de formato largo: generación IA + edición narrativa completa.", tools:["Kling AI","Premiere Pro","Media Encoder"] },
+  { id:"18syBkdS_fe9yENvzbbnBQfTMGja-rHsi", date:"01 Jul 2026", title:"Spot publicitario B2B", desc:"Anuncio dirigido a audiencia empresarial. Guion, generación y corte final.", tools:["Grok","Kling AI","Premiere Pro"] },
+  { id:"1pHt7RHsECGaUGlpU7jz_s75Y5FcTCbnU", date:"09 Jul 2026", title:"Ad vertical 9:16", desc:"Pieza publicitaria vertical, narración en off, talento generado con IA.", tools:["Grok","Kling AI","Higgsfield","After Effects"] },
+  { id:"1boAF0N4H5OAmDWQIBzqXmLt1FpOXPLGi", date:"15 Jun 2026", title:"Showcase mensual", desc:"Corte de producto mostrando avances de una plataforma en uso real.", tools:["Kling AI","Premiere Pro"] },
+  { id:"1A-YGUfrG0ehHZiEPsq9G83kwEpeD6mfg", date:"15 Jun 2026", title:"Hook — apertura de campaña", desc:"Pieza corta de apertura para campañas de awareness en redes sociales.", tools:["Higgsfield","After Effects"] },
+  { id:"1nWPyLN_6QBjZJ91FbS79bZTGckQWwwZX", date:"12 May 2026", title:"Promo corta", desc:"Promoción ágil de producto, formato optimizado para pauta paga.", tools:["Kling AI","Premiere Pro"] },
+  { id:"1kM3micveZR-HAsXwtnm1j9GqQFfGQw0o", date:"11 Jun 2026", title:"Video de lanzamiento", desc:"Pieza de anuncio / lanzamiento, tono narrativo y ritmo de reveal.", tools:["Grok","Kling AI","After Effects"] },
+  { id:"1mTADh7ciyJdsPOxR_hslj0P-rr3D4u_4", date:"09 Jul 2026", title:"Intro de módulo educativo", desc:"Apertura de contenido instruccional en formato de video corto.", tools:["Higgsfield","Premiere Pro"] }
+];
+
+const grid = document.getElementById('videoGrid');
+grid.innerHTML = videos.map(v => `
+  <div class="vcard">
+    <div class="vthumb">
+      <img src="https://drive.google.com/thumbnail?id=${v.id}&sz=w800" alt="${v.title}" loading="lazy" onerror="this.style.display='none'">
+      <div class="play"><svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" fill="rgba(11,18,32,0.55)"/><path d="M9.5 7.5v9l8-4.5z"/></svg></div>
+    </div>
+    <div class="vbody">
+      <div class="meta"><span class="date">${v.date}</span></div>
+      <h4>${v.title}</h4>
+      <p>${v.desc}</p>
+      <div class="tool-tags">${v.tools.map(t=>`<span>${t}</span>`).join('')}</div>
+      <a class="watch" href="https://drive.google.com/file/d/${v.id}/view" target="_blank" rel="noopener">Ver video completo →</a>
+    </div>
+  </div>
+`).join('');
+</script>
+
+</body>
+</html>
