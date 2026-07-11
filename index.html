@@ -126,18 +126,30 @@
   .vbody a.watch:hover{border-color:var(--blue-bright); color:var(--blue-bright);}
 
   footer{padding:40px 8vw; font-size:12px; color:var(--muted-dark); border-top:1px solid var(--line);}
+
+  /* image gallery placeholders */
+  .image-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:24px; margin-top:40px;}
+  .img-placeholder{
+    aspect-ratio:1/1; border-radius:14px; border:1px dashed var(--line); background:var(--navy-2);
+    transition:box-shadow .45s cubic-bezier(.16,1,.3,1), border-color .45s ease, transform .45s ease;
+  }
+  .img-placeholder:hover{
+    border-color:var(--blue-bright); border-style:solid; transform:translateY(-4px);
+    box-shadow:0 0 0 1px rgba(63,169,224,0.55), 0 0 36px 6px rgba(63,169,224,0.35);
+  }
 </style>
 </head>
 <body>
 
 <nav class="rail">
-  <a href="#ch0" data-idx="0"><span class="dot"></span><span class="label">Inicio</span></a>
-  <a href="#chS" data-idx="1"><span class="dot"></span><span class="label">Impacto</span></a>
-  <a href="#ch1" data-idx="2"><span class="dot"></span><span class="label">Experiencia</span></a>
-  <a href="#ch2" data-idx="3"><span class="dot"></span><span class="label">Stack</span></a>
+  <a href="#home" data-idx="0"><span class="dot"></span><span class="label">Inicio</span></a>
+  <a href="#skills" data-idx="1"><span class="dot"></span><span class="label">Skills</span></a>
+  <a href="#impact" data-idx="2"><span class="dot"></span><span class="label">Impacto</span></a>
+  <a href="#experience" data-idx="3"><span class="dot"></span><span class="label">Experiencia</span></a>
+  <a href="#gallery" data-idx="4"><span class="dot"></span><span class="label">Imágenes</span></a>
 </nav>
 
-<section class="hero" id="ch0">
+<section class="hero" id="home">
   <canvas id="nodeCanvas"></canvas>
   <div class="hero-eyebrow mono">AI Creative &amp; Video Producer — Reynosa, MX</div>
   <h1>Edmundo<br>Cavazos</h1>
@@ -145,7 +157,22 @@
   <div class="scroll-cue"><div class="bar"></div>Scroll</div>
 </section>
 
-<section id="chS">
+<section id="skills">
+  <span class="chapter-num mono">Skills</span>
+  <h2 class="title reveal">De la generación IA a la edición final.</h2>
+  <p class="lede reveal">Un mismo pipeline, de punta a punta: generación con modelos de IA, ensamblaje y post-producción profesional.</p>
+  <div class="stack-row reveal">
+    <div class="stack-chip"><div class="mark" style="background:#3FA9E0;">Gr</div>Grok</div>
+    <div class="stack-chip"><div class="mark" style="background:#E8860A;">Kl</div>Kling AI</div>
+    <div class="stack-chip"><div class="mark" style="background:#9B6BD9;">Hf</div>Higgsfield</div>
+    <div class="stack-chip"><div class="mark" style="background:#9999FF;">Ae</div>Adobe After Effects</div>
+    <div class="stack-chip"><div class="mark" style="background:#00005B;">Pr</div>Adobe Premiere Pro</div>
+    <div class="stack-chip"><div class="mark" style="background:#31A8FF;">Ps</div>Adobe Photoshop</div>
+    <div class="stack-chip"><div class="mark" style="background:#B4A7D6;">Me</div>Adobe Media Encoder</div>
+  </div>
+</section>
+
+<section id="impact">
   <span class="chapter-num mono">Impacto</span>
   <h2 class="title reveal">De comunicación corporativa a marketing con IA.</h2>
   <p class="lede reveal">Ocho años construyendo comunicación de marca — primero en una manufacturera global, hoy liderando el marketing y la producción de contenido con IA de un SaaS.</p>
@@ -193,7 +220,7 @@
   </div>
 </section>
 
-<section id="ch1">
+<section id="experience">
   <span class="chapter-num mono">Experiencia</span>
   <h2 class="title reveal">Las marcas donde he construido esto.</h2>
   <p class="lede reveal">De comunicación corporativa en una manufacturera global a liderar marketing y contenido con IA en un SaaS.</p>
@@ -221,19 +248,12 @@
   </div>
 </section>
 
-<section id="ch2">
-  <span class="chapter-num mono">Stack</span>
-  <h2 class="title reveal">De la generación IA a la edición final.</h2>
-  <p class="lede reveal">Un mismo pipeline, de punta a punta: generación con modelos de IA, ensamblaje y post-producción profesional.</p>
-  <div class="stack-row reveal">
-    <div class="stack-chip"><div class="mark" style="background:#3FA9E0;">Gr</div>Grok</div>
-    <div class="stack-chip"><div class="mark" style="background:#E8860A;">Kl</div>Kling AI</div>
-    <div class="stack-chip"><div class="mark" style="background:#9B6BD9;">Hf</div>Higgsfield</div>
-    <div class="stack-chip"><div class="mark" style="background:#9999FF;">Ae</div>Adobe After Effects</div>
-    <div class="stack-chip"><div class="mark" style="background:#00005B;">Pr</div>Adobe Premiere Pro</div>
-    <div class="stack-chip"><div class="mark" style="background:#31A8FF;">Ps</div>Adobe Photoshop</div>
-    <div class="stack-chip"><div class="mark" style="background:#B4A7D6;">Me</div>Adobe Media Encoder</div>
-  </div>
+<section id="gallery">
+  <span class="chapter-num mono">Imágenes</span>
+  <h2 class="title reveal">Piezas visuales — próximamente.</h2>
+  <p class="lede reveal">Espacio reservado para fotografía, branding y diseño gráfico. Pasa el mouse por un cuadro.</p>
+
+  <div class="image-grid reveal" id="imageGrid"></div>
 </section>
 
 <footer>Edmundo Cavazos — 2025–2026</footer>
@@ -242,7 +262,7 @@
 const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }); },{threshold:0.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-const sections = ['ch0','chS','ch1','ch2'];
+const sections = ['home','skills','impact','experience','gallery'];
 const railLinks = document.querySelectorAll('.rail a');
 const secObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
@@ -305,6 +325,9 @@ grid.innerHTML = videos.map(v => `
 
 document.getElementById('statYears').textContent = (new Date().getFullYear() - 2018) + '+';
 document.getElementById('statVideos').textContent = videos.length;
+
+const imageGrid = document.getElementById('imageGrid');
+imageGrid.innerHTML = Array.from({length:8}).map(() => `<div class="img-placeholder"></div>`).join('');
 </script>
 
 </body>
