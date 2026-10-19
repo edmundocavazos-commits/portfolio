@@ -158,6 +158,10 @@
   .brand-card p{font-size:13.5px; color:var(--muted); line-height:1.6;}
   @media (max-width:900px){ .brand-grid{grid-template-columns:1fr;} }
   .clients{display:flex; flex-wrap:wrap; align-items:center; gap:40px 56px; margin-top:32px; padding:32px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .socials{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:6px;}
+  .socials a{font-size:11.5px; font-family:'JetBrains Mono',monospace; color:var(--blue-bright); text-decoration:none; border:1px solid var(--line); border-radius:100px; padding:5px 12px;}
+  .socials a:hover{border-color:var(--blue-bright); background:rgba(63,169,224,0.08);}
+  @media (max-width:700px){ .photo-row[style]{grid-template-columns:repeat(3,1fr) !important;} }
   .clients{gap:14px;}
   .clients span{background:#F4F6FA; border-radius:12px; padding:12px 18px; display:flex; align-items:center; height:64px; opacity:0.85; transition:opacity .3s ease, transform .3s ease;}
   .clients span:hover{opacity:1; transform:translateY(-3px);}
@@ -245,12 +249,16 @@
     <div class="stack-chip"><div class="mark" style="background:#3FA9E0;">Gr</div>Grok</div>
     <div class="stack-chip"><div class="mark" style="background:#E8860A;">Kl</div>Kling AI</div>
     <div class="stack-chip"><div class="mark" style="background:#9B6BD9;">Hf</div>Higgsfield</div>
-    <div class="stack-chip"><div class="mark" style="background:#D97757;">Cl</div>Claude</div>
+    <div class="stack-chip"><div class="mark" style="background:#D97757;">Cl</div>Claude &amp; Claude Code</div>
+    <div class="stack-chip"><div class="mark" style="background:#10A37F; color:#fff;">GP</div>ChatGPT</div>
+    <div class="stack-chip"><div class="mark" style="background:#EDEFF3;">{ }</div>Prompts en JSON</div>
+    <div class="stack-chip"><div class="mark" style="background:#3FA9E0;">Bt</div>Bots personalizados en Grok</div>
     <div class="stack-chip"><div class="mark" style="background:#9999FF;">Ae</div>Adobe After Effects</div>
     <div class="stack-chip"><div class="mark" style="background:#00005B; color:#9999FF;">Pr</div>Adobe Premiere Pro</div>
     <div class="stack-chip"><div class="mark" style="background:#31A8FF;">Ps</div>Adobe Photoshop</div>
     <div class="stack-chip"><div class="mark" style="background:#B4A7D6;">Me</div>Adobe Media Encoder</div>
-    <div class="stack-chip"><div class="mark" style="background:#EDEFF3;">▲</div>HTML / CSS · Vercel</div>
+    <div class="stack-chip"><div class="mark" style="background:#EDEFF3;">▲</div>Creación de páginas web · HTML / CSS · Next.js · Vercel</div>
+    <div class="stack-chip"><div class="mark" style="background:#24292F; color:#fff;">Gh</div>GitHub</div>
     <div class="stack-chip"><div class="mark" style="background:#1877F2; color:#fff;">Ma</div>Meta Ads</div>
   </div>
 </section>
@@ -299,6 +307,29 @@
       <img src="media/imagenes/solutions/bots-funnels.jpg" alt="Bots y funnels" loading="lazy">
       <figcaption><b>Bots y funnels</b><span>Asistentes en WhatsApp 24/7 y funnels medidos del anuncio a la venta</span></figcaption>
     </figure>
+  </div>
+
+  <h3 class="sub-h reveal">Proyecto destacado — Integrity Seguros</h3>
+  <p class="sub-p reveal">Sitio y cotizador de seguros de auto para quienes cruzan entre EE. UU. y México. Lo diseñé y lo desarrollé, junto con su marca y su contenido.</p>
+  <div class="case-hero">
+    <figure class="shot reveal" style="margin-top:0" data-src="media/solutions/proyectos/integrity.webp" data-t="Integrity — sitio y cotizador por número de serie">
+      <img src="media/solutions/proyectos/integrity.webp" alt="Sitio de Integrity Seguros" loading="lazy">
+    </figure>
+    <ul class="deliverables reveal">
+      <li><span class="n">01</span><span><b>Sitio bilingüe ES/EN</b> — mobile first, un paso a la vez, con siete productos: Southbound, Northbound, moto, lancha, RV, carga y tractocamión.</span></li>
+      <li><span class="n">02</span><span><b>Cotizador propio</b> — cotiza con el número de serie (VIN) y devuelve tres paquetes. Reemplaza el iframe anterior, que en celular dejaba el botón de cotizar fuera de la pantalla.</span></li>
+      <li><span class="n">03</span><span><b>API en Next.js + Supabase</b> — envuelve el motor de la aseguradora, guarda cada cotización y la comparte con la app móvil.</span></li>
+      <li><span class="n">04</span><span><b>Bot creativo en Grok</b> — un “director de arte” con las reglas de la marca que genera la fotografía de campaña.</span></li>
+      <li><span class="n">05</span><span><b>Brandbook 2026 y plan de marketing</b> — identidad, plan de contenido del Q4 y guiones de video.</span></li>
+    </ul>
+  </div>
+  <div class="photo-row reveal" style="grid-template-columns:repeat(6,1fr)">
+    <img src="media/imagenes/integrity/p01-gmc-pareja.jpg" alt="Integrity — Southbound" loading="lazy">
+    <img src="media/imagenes/integrity/p06-conductor-feliz.jpg" alt="Integrity — conductor" loading="lazy">
+    <img src="media/imagenes/integrity/m1-moto-casco.jpg" alt="Integrity — moto" loading="lazy">
+    <img src="media/imagenes/integrity/l1-lancha-amigos.jpg" alt="Integrity — lancha" loading="lazy">
+    <img src="media/imagenes/integrity/r1-rv-pareja.jpg" alt="Integrity — RV" loading="lazy">
+    <img src="media/imagenes/integrity/t2-tracto-sonrie.jpg" alt="Integrity — tractocamión" loading="lazy">
   </div>
 
   <h3 class="sub-h reveal">Escenas de producto</h3>
@@ -366,16 +397,19 @@
       <div class="logo light"><img src="media/imagenes/marcas/images_controlify-nuevo-logo-1x-fondo-blanco-1.webp" alt="Controlify"></div>
       <h3>Controlify</h3>
       <p>Sistema operativo para negocios. Identidad, landing, íconos, animaciones, ads, showcases y Academia.</p>
+      <div class="socials"><a href="https://www.instagram.com/controlifyapp/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.facebook.com/people/Controlify/61577512535224/" target="_blank" rel="noopener">Facebook ↗</a><a href="https://controlifyapp.com" target="_blank" rel="noopener">Sitio ↗</a></div>
     </div>
     <div class="brand-card reveal">
       <div class="logo"><img src="media/imagenes/marcas/reclutaya_logoclaro.png" alt="ReclutaYa"></div>
       <h3>ReclutaYa</h3>
       <p>Plataforma de reclutamiento. Brandbook, kick-off, showcases de producto y campañas de lanzamiento.</p>
+      <div class="socials"><a href="https://www.facebook.com/people/Reclutaya/61591063012013/" target="_blank" rel="noopener">Facebook ↗</a><a href="https://reclutaya.com" target="_blank" rel="noopener">Sitio ↗</a></div>
     </div>
     <div class="brand-card reveal">
       <div class="logo"><img src="media/imagenes/marcas/integrity-logo-horizontal.png" alt="Integrity"></div>
       <h3>Integrity Seguros</h3>
-      <p>Brandbook 2026, plan de marketing y contenido, guiones de video e imagen generada con IA.</p>
+      <p>Sitio y cotizador bilingüe, brandbook 2026, plan de marketing y contenido, guiones de video e imagen generada con IA.</p>
+      <div class="socials"><a href="https://www.instagram.com/integrity.agentes/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.facebook.com/integrityagentedeseguros" target="_blank" rel="noopener">Facebook ↗</a></div>
     </div>
     <div class="brand-card reveal">
       <div class="logo"><img src="media/imagenes/marcas/controlify-finanzas-logo.svg" alt="Controlify Finanzas"></div>
@@ -391,6 +425,7 @@
       <div class="logo"><img src="media/imagenes/landing/controly-robot.png" alt="Controlify Solutions"></div>
       <h3>Controlify Solutions</h3>
       <p>Agencia de software: sitio completo, portafolio de productos, proyectos para clientes, bots y funnels.</p>
+      <div class="socials"><a href="https://controlify-solutions.vercel.app" target="_blank" rel="noopener">Sitio ↗</a></div>
     </div>
   </div>
 
@@ -401,7 +436,7 @@
 <section id="impact">
   <span class="chapter-num mono">Impacto</span>
   <h2 class="title reveal">De comunicación corporativa a marketing con IA.</h2>
-  <p class="lede reveal">Ocho años construyendo comunicación de marca — primero en una manufacturera global, hoy liderando el marketing y la producción de contenido con IA de un SaaS.</p>
+  <p class="lede reveal">Más de siete años en comunicación: primero en una manufacturera global, hoy liderando el marketing y la producción de contenido con IA de una agencia de software.</p>
 
   <div class="stats-bar reveal">
     <div class="stat-tile"><div class="stat-num" id="statYears">–</div><div class="stat-label">Años en marketing &amp; comunicación (Corning + Controlify)</div></div>
@@ -441,8 +476,8 @@
 
   <div class="exp-grid">
     <div class="exp-col reveal">
-      <div class="exp-company"><h3>Corning</h3><span class="exp-dates">2018–2025</span></div>
-      <p class="exp-role">Marketing &amp; Digital Communications / Corporate Communications</p>
+      <div class="exp-company"><h3>Corning Optical Communications</h3><span class="exp-dates">2018–2025</span></div>
+      <p class="exp-role">Communications Auxiliary — Comunicación corporativa (2020–2025) · RH / Reclutamiento (2018–2019)</p>
       <p class="exp-bio">Lideré la creación de contenido visual y audiovisual para comunicación interna y externa, desarrollando branding, fotografía, video, diseño gráfico, campañas digitales, cobertura de eventos, materiales corporativos y proyectos de transformación digital para distintas áreas de la empresa.</p>
     </div>
     <div class="exp-col reveal">
@@ -455,7 +490,7 @@
 
 <footer>
   <span>Edmundo Cavazos — 2025–2026</span>
-  <a href="https://controlifyapp.com" target="_blank" rel="noopener">controlifyapp.com →</a>
+  <span><a href="https://www.linkedin.com/in/edmundo-cavazos-pulido-087311187/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.instagram.com/controlifyapp/" target="_blank" rel="noopener">@controlifyapp</a> · <a href="https://controlifyapp.com" target="_blank" rel="noopener">controlifyapp.com →</a></span>
 </footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true">
@@ -670,7 +705,7 @@ imageGrid.addEventListener('click', e=>{ const f = e.target.closest('figure'); i
 document.querySelectorAll('.photo-row img').forEach(img=>img.addEventListener('click', ()=>zoom(img.src, img.alt)));
 
 observeReveals(document);
-document.getElementById('statYears').textContent = (new Date().getFullYear() - 2018) + '+';
+document.getElementById('statYears').textContent = '7+';
 document.getElementById('statVideos').textContent = videos.length;
 document.getElementById('statPieces').textContent = (images.length + icons.length + loops.length) + '+';
 </script>
