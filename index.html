@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Edmundo Cavazos</title>
+<meta name="description" content="Edmundo Cavazos — Marketing & Creative Lead. Video con IA, branding, diseño de producto y sitios web.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#0B1220;
     --navy-2:#111B2E;
+    --navy-3:#16243C;
     --blue:#197CBB;
     --blue-bright:#3FA9E0;
     --muted:#8A93A6;
@@ -22,45 +24,126 @@
   h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
   .mono{font-family:'JetBrains Mono',monospace;}
   ::selection{background:var(--blue); color:#fff;}
+  img,video{display:block; max-width:100%;}
   @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;} }
 
   .rail{position:fixed; right:28px; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:16px;}
-  .rail a{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted); font-size:11px; letter-spacing:0.05em;}
+  .rail a{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted); font-size:11px; letter-spacing:0.05em; flex-direction:row-reverse;}
   .rail a .dot{width:7px;height:7px;border-radius:50%; background:rgba(255,255,255,0.25); transition:all .3s ease;}
   .rail a.active .dot{background:var(--blue-bright); box-shadow:0 0 0 4px rgba(63,169,224,0.18);}
   .rail a.active{color:#EDEFF3;}
-  .rail a span.label{opacity:0; transform:translateX(6px); transition:all .25s ease; white-space:nowrap;}
+  .rail a span.label{opacity:0; transform:translateX(-6px); transition:all .25s ease; white-space:nowrap;}
   .rail a:hover span.label{opacity:1; transform:translateX(0);}
   @media (max-width:900px){ .rail{display:none;} }
 
+  /* hero */
   .hero{min-height:100vh; position:relative; display:flex; flex-direction:column; justify-content:center; padding:0 8vw; overflow:hidden;}
-  #nodeCanvas{position:absolute; inset:0; width:100%; height:100%; opacity:0.5;}
-  .hero-eyebrow{font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--blue-bright); margin-bottom:22px; position:relative; z-index:2;}
-  .hero h1{font-size:clamp(48px, 9vw, 122px); font-weight:600; line-height:0.98; letter-spacing:-0.02em; position:relative; z-index:2;}
-  .hero p.role{margin-top:26px; font-size:clamp(16px,2vw,20px); color:var(--muted); max-width:620px; line-height:1.6; position:relative; z-index:2;}
-  .scroll-cue{position:absolute; bottom:48px; left:8vw; font-size:11px; color:var(--muted-dark); letter-spacing:0.1em; display:flex; align-items:center; gap:10px;}
+  .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.16; filter:saturate(0.6);}
+  .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, var(--navy) 25%, rgba(11,18,32,0.4) 100%), linear-gradient(0deg, var(--navy) 0%, transparent 30%);}
+  #nodeCanvas{position:absolute; inset:0; width:100%; height:100%; opacity:0.5; z-index:1;}
+  .hero > *:not(video):not(canvas){position:relative; z-index:2;}
+  .hero-eyebrow{font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--blue-bright); margin-bottom:22px;}
+  .hero h1{font-size:clamp(48px, 9vw, 122px); font-weight:600; line-height:0.98; letter-spacing:-0.02em;}
+  .hero p.role{margin-top:26px; font-size:clamp(16px,2vw,20px); color:var(--muted); max-width:640px; line-height:1.6;}
+  .hero-ctas{display:flex; gap:12px; flex-wrap:wrap; margin-top:36px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-size:13.5px; text-decoration:none; padding:12px 22px; border-radius:100px; border:1px solid var(--line); color:#EDEFF3; transition:all .25s ease; background:transparent; cursor:pointer; font-family:inherit;}
+  .btn.primary{background:var(--blue); border-color:var(--blue);}
+  .btn:hover{border-color:var(--blue-bright); background:rgba(63,169,224,0.12);}
+  .btn.primary:hover{background:var(--blue-bright);}
+  .scroll-cue{position:absolute; bottom:48px; left:8vw; font-size:11px; color:var(--muted-dark); letter-spacing:0.1em; display:flex; align-items:center; gap:10px; z-index:2;}
   .scroll-cue .bar{width:1px;height:36px;background:linear-gradient(var(--muted-dark),transparent); animation:pulse 2.4s infinite;}
   @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-  section{position:relative; padding:150px 8vw;}
+  section{position:relative; padding:140px 8vw;}
   .chapter-num{font-size:13px; color:var(--blue-bright); margin-bottom:18px; display:block;}
-  h2.title{font-size:clamp(30px,3.6vw,50px); font-weight:600; letter-spacing:-0.01em; max-width:780px; line-height:1.1; margin-bottom:24px;}
-  .lede{font-size:18px; line-height:1.7; color:var(--muted); max-width:620px;}
+  h2.title{font-size:clamp(30px,3.6vw,50px); font-weight:600; letter-spacing:-0.01em; max-width:820px; line-height:1.1; margin-bottom:24px;}
+  .lede{font-size:18px; line-height:1.7; color:var(--muted); max-width:660px;}
+  .sub-h{font-size:13px; text-transform:uppercase; letter-spacing:0.06em; color:var(--blue-bright); margin:80px 0 8px; font-family:'JetBrains Mono',monospace;}
+  .sub-p{font-size:15px; color:var(--muted); max-width:620px; line-height:1.6;}
 
   .reveal{opacity:0; transform:translateY(28px); transition:all .8s cubic-bezier(.16,1,.3,1);}
   .reveal.in{opacity:1; transform:translateY(0);}
 
   /* stack / tools */
   .stack-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:56px;}
-  .stack-chip{
-    display:flex; align-items:center; gap:10px;
-    border:1px solid var(--line); border-radius:100px; padding:11px 20px 11px 14px;
-    font-size:13.5px; color:#EDEFF3; background:var(--navy-2);
-  }
-  .stack-chip .mark{
-    width:26px;height:26px;border-radius:7px; display:flex;align-items:center;justify-content:center;
-    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:10.5px; color:#0B1220;
-  }
+  .stack-chip{display:flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:100px; padding:11px 20px 11px 14px; font-size:13.5px; color:#EDEFF3; background:var(--navy-2);}
+  .stack-chip .mark{width:26px;height:26px;border-radius:7px; display:flex;align-items:center;justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:10.5px; color:#0B1220;}
+
+  /* case study: Controlify */
+  .case-hero{display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center; margin-top:56px;}
+  .case-hero .frame{border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--navy-2); aspect-ratio:16/9;}
+  .case-hero .frame video{width:100%; height:100%; object-fit:cover;}
+  .deliverables{list-style:none;}
+  .deliverables li{display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--muted); line-height:1.5;}
+  .deliverables li:last-child{border-bottom:none;}
+  .deliverables .n{font-family:'JetBrains Mono',monospace; color:var(--blue-bright); font-size:12px; flex-shrink:0; padding-top:2px;}
+  .deliverables b{color:#EDEFF3; font-weight:500;}
+  @media (max-width:900px){ .case-hero{grid-template-columns:1fr;} }
+
+  .loop-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; margin-top:32px;}
+  .loop{border-radius:14px; overflow:hidden; border:1px solid var(--line); background:var(--navy-2); position:relative;}
+  .loop video{width:100%; aspect-ratio:16/10; object-fit:cover;}
+  .loop span{position:absolute; left:12px; bottom:12px; font-size:10.5px; font-family:'JetBrains Mono',monospace; letter-spacing:0.04em; padding:5px 10px; border-radius:100px; background:rgba(11,18,32,0.75); backdrop-filter:blur(6px); color:#EDEFF3;}
+
+  .icon-row{display:grid; grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); gap:16px; margin-top:32px;}
+  .icon-row figure{background:var(--navy-2); border:1px solid var(--line); border-radius:16px; padding:16px; display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .3s ease, border-color .3s ease;}
+  .icon-row figure:hover{transform:translateY(-4px); border-color:rgba(63,169,224,0.4);}
+  .icon-row img{width:52px; height:52px; object-fit:contain;}
+  .icon-row figcaption{font-size:10.5px; color:var(--muted); text-align:center; line-height:1.3;}
+
+  .photo-row{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:32px;}
+  .photo-row img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:14px; border:1px solid var(--line); cursor:zoom-in;}
+  @media (max-width:700px){ .photo-row{grid-template-columns:repeat(2,1fr);} }
+
+  /* filters */
+  .filters{display:flex; gap:10px; flex-wrap:wrap; margin:48px 0 8px;}
+  .filter-btn{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.04em; padding:8px 16px; border-radius:100px; border:1px solid var(--line); background:transparent; color:var(--muted); cursor:pointer; transition:all .25s ease;}
+  .filter-btn.active, .filter-btn:hover{color:#EDEFF3; border-color:var(--blue-bright); background:rgba(63,169,224,0.08);}
+  .filter-btn .count{opacity:0.55; margin-left:4px;}
+
+  /* video cards */
+  .video-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:24px; margin-top:32px;}
+  .vcard{background:var(--navy-2); border:1px solid var(--line); border-radius:14px; overflow:hidden; transition:transform .35s ease, border-color .35s ease; cursor:pointer; text-align:left; color:inherit; font:inherit; padding:0;}
+  .vcard:hover{transform:translateY(-6px); border-color:rgba(63,169,224,0.4);}
+  .vcard.hidden{display:none;}
+  .vthumb{aspect-ratio:16/9; background:linear-gradient(135deg,var(--navy-3),var(--navy)); position:relative; overflow:hidden;}
+  .vthumb img{width:100%;height:100%;object-fit:cover; transition:transform .6s ease;}
+  .vthumb img.vertical{object-fit:contain; background:#070C16;}
+  .vcard:hover .vthumb img{transform:scale(1.04);}
+  .vthumb .play{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;}
+  .vthumb .play svg{width:48px;height:48px; filter:drop-shadow(0 4px 14px rgba(0,0,0,0.4)); transition:transform .3s ease;}
+  .vcard:hover .play svg{transform:scale(1.12);}
+  .vthumb .fmt{position:absolute; top:12px; right:12px; font-size:10px; font-family:'JetBrains Mono',monospace; padding:4px 9px; border-radius:100px; background:rgba(11,18,32,0.75); color:#EDEFF3;}
+  .vbody{padding:18px 20px 22px;}
+  .vbody .meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; font-family:'JetBrains Mono',monospace;}
+  .vbody .brand{color:var(--blue-bright);}
+  .vbody .date{color:var(--muted-dark);}
+  .vbody h4{font-size:17px; font-weight:600; margin-bottom:8px; font-family:'Space Grotesk',sans-serif;}
+  .vbody p{font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:14px;}
+  .tool-tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .tool-tags span{font-size:10px; padding:4px 10px; border:1px solid var(--line); border-radius:100px; color:var(--muted); font-family:'JetBrains Mono',monospace;}
+
+  /* image gallery */
+  .masonry{columns:4 240px; column-gap:20px; margin-top:32px;}
+  .masonry figure{break-inside:avoid; margin-bottom:20px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:var(--navy-2); cursor:zoom-in; transition:transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease, border-color .45s ease;}
+  .masonry figure:hover{transform:translateY(-4px); border-color:var(--blue-bright); box-shadow:0 0 0 1px rgba(63,169,224,0.55), 0 0 36px 6px rgba(63,169,224,0.25);}
+  .masonry figure.hidden{display:none;}
+  .masonry img{width:100%; height:auto;}
+  .masonry figcaption{padding:12px 14px; font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:10px;}
+  .masonry figcaption .cat{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--blue-bright); text-transform:uppercase; letter-spacing:0.05em; white-space:nowrap;}
+
+  /* brands */
+  .brand-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:56px;}
+  .brand-card{background:var(--navy-2); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:14px;}
+  .brand-card .logo{height:56px; display:flex; align-items:center;}
+  .brand-card .logo img{max-height:48px; width:auto; object-fit:contain;}
+  .brand-card .logo.light{background:#fff; border-radius:10px; padding:8px 14px; align-self:flex-start;}
+  .brand-card h3{font-size:19px; font-weight:600;}
+  .brand-card p{font-size:13.5px; color:var(--muted); line-height:1.6;}
+  @media (max-width:900px){ .brand-grid{grid-template-columns:1fr;} }
+  .clients{display:flex; flex-wrap:wrap; align-items:center; gap:40px 56px; margin-top:32px; padding:32px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .clients img{height:38px; width:auto; object-fit:contain; opacity:0.7; filter:grayscale(1) brightness(1.6); transition:all .3s ease;}
+  .clients img:hover{opacity:1; filter:none;}
 
   /* impact / stats */
   .stats-bar{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:56px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
@@ -73,22 +156,17 @@
     .stat-tile{border-bottom:1px solid var(--line);}
     .stat-tile:nth-child(2n){border-right:none;}
   }
-
   .impact-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; margin-top:56px;}
   .impact-col h4{font-size:13px; text-transform:uppercase; letter-spacing:0.06em; color:var(--blue-bright); margin-bottom:20px; font-family:'JetBrains Mono',monospace;}
-  .impact-list{list-style:none;}
-  .impact-list li{display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--muted); line-height:1.5;}
-  .impact-list li:last-child{border-bottom:none;}
-  .impact-list .n{font-family:'JetBrains Mono',monospace; color:var(--blue-bright); font-size:12px; flex-shrink:0; padding-top:2px;}
   @media (max-width:900px){ .impact-grid{grid-template-columns:1fr;} }
 
-  /* experience: Corning | Controlify side by side */
+  /* experience */
   .exp-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; margin-top:56px; align-items:start;}
   .exp-col{padding:0 44px;}
   .exp-col:first-child{padding-left:0; border-right:1px solid var(--line);}
   .exp-col:last-child{padding-right:0;}
   .exp-company{display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap;}
-  .exp-company h3{font-size:22px; font-weight:600; font-family:'Space Grotesk',sans-serif;}
+  .exp-company h3{font-size:22px; font-weight:600;}
   .exp-dates{font-size:12px; color:var(--blue-bright); font-family:'JetBrains Mono',monospace; letter-spacing:0.04em;}
   .exp-role{font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;}
   .exp-bio{font-size:14.5px; line-height:1.7; color:var(--muted);}
@@ -98,77 +176,147 @@
     .exp-col:first-child{border-right:none; border-bottom:1px solid var(--line); padding-bottom:40px; margin-bottom:40px;}
   }
 
-  /* project grid */
-  .filters{display:flex; gap:10px; flex-wrap:wrap; margin:48px 0 8px;}
-  .filter-btn{
-    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.04em;
-    padding:8px 16px; border-radius:100px; border:1px solid var(--line); background:transparent;
-    color:var(--muted); cursor:pointer; transition:all .25s ease;
-  }
-  .filter-btn.active, .filter-btn:hover{color:#EDEFF3; border-color:var(--blue-bright); background:rgba(63,169,224,0.08);}
+  footer{padding:40px 8vw; font-size:12px; color:var(--muted-dark); border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+  footer a{color:var(--muted); text-decoration:none;}
+  footer a:hover{color:var(--blue-bright);}
 
-  .video-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:28px; margin-top:40px;}
-  .video-grid.compact{grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:20px; margin-top:28px;}
-  .vcard{background:var(--navy-2); border:1px solid var(--line); border-radius:14px; overflow:hidden; transition:transform .35s ease, border-color .35s ease;}
-  .vcard:hover{transform:translateY(-6px); border-color:rgba(63,169,224,0.4);}
-  .vthumb{aspect-ratio:16/9; background:linear-gradient(135deg,#16243C,#0B1220); position:relative; overflow:hidden;}
-  .vthumb img{width:100%;height:100%;object-fit:cover; display:block;}
-  .vthumb .play{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;}
-  .vthumb .play svg{width:44px;height:44px; opacity:0.9; filter:drop-shadow(0 4px 14px rgba(0,0,0,0.4));}
-  .vbody{padding:20px 22px 24px;}
-  .vbody .meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
-  .vbody .date{font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--blue-bright); font-family:'JetBrains Mono',monospace;}
-  .vbody h4{font-size:17px; font-weight:600; margin-bottom:8px; font-family:'Space Grotesk',sans-serif;}
-  .vbody p{font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:14px;}
-  .tool-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
-  .tool-tags span{font-size:10px; padding:4px 10px; border:1px solid var(--line); border-radius:100px; color:var(--muted); font-family:'JetBrains Mono',monospace;}
-  .vbody a.watch{font-size:12px; color:#EDEFF3; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:2px;}
-  .vbody a.watch:hover{border-color:var(--blue-bright); color:var(--blue-bright);}
-
-  footer{padding:40px 8vw; font-size:12px; color:var(--muted-dark); border-top:1px solid var(--line);}
-
-  /* image gallery placeholders */
-  .image-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:24px; margin-top:40px;}
-  .img-placeholder{
-    aspect-ratio:1/1; border-radius:14px; border:1px dashed var(--line); background:var(--navy-2);
-    transition:box-shadow .45s cubic-bezier(.16,1,.3,1), border-color .45s ease, transform .45s ease;
-  }
-  .img-placeholder:hover{
-    border-color:var(--blue-bright); border-style:solid; transform:translateY(-4px);
-    box-shadow:0 0 0 1px rgba(63,169,224,0.55), 0 0 36px 6px rgba(63,169,224,0.35);
-  }
+  /* modal */
+  .modal{position:fixed; inset:0; z-index:100; background:rgba(5,9,18,0.92); backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center; padding:4vh 4vw;}
+  .modal.open{display:flex;}
+  .modal-inner{position:relative; max-width:min(1200px,92vw); max-height:88vh; width:100%; display:flex; flex-direction:column; align-items:center;}
+  .modal-media{max-width:100%; max-height:80vh; border-radius:12px; background:#000;}
+  .modal-media.iframe{width:min(1200px,92vw); aspect-ratio:16/9; max-height:80vh; border:0;}
+  .modal-caption{margin-top:16px; font-size:14px; color:var(--muted); text-align:center;}
+  .modal-caption b{color:#EDEFF3; font-weight:600; font-family:'Space Grotesk',sans-serif;}
+  .modal-close{position:fixed; top:20px; right:24px; width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--navy-2); color:#EDEFF3; font-size:22px; cursor:pointer;}
+  .modal-close:hover{border-color:var(--blue-bright);}
 </style>
 </head>
 <body>
 
 <nav class="rail">
-  <a href="#home" data-idx="0"><span class="dot"></span><span class="label">Inicio</span></a>
-  <a href="#skills" data-idx="1"><span class="dot"></span><span class="label">Skills</span></a>
-  <a href="#impact" data-idx="2"><span class="dot"></span><span class="label">Impacto</span></a>
-  <a href="#experience" data-idx="3"><span class="dot"></span><span class="label">Experiencia</span></a>
-  <a href="#gallery" data-idx="4"><span class="dot"></span><span class="label">Imágenes</span></a>
+  <a href="#home"><span class="dot"></span><span class="label">Inicio</span></a>
+  <a href="#skills"><span class="dot"></span><span class="label">Skills</span></a>
+  <a href="#controlify"><span class="dot"></span><span class="label">Caso Controlify</span></a>
+  <a href="#videos"><span class="dot"></span><span class="label">Videos</span></a>
+  <a href="#diseno"><span class="dot"></span><span class="label">Diseño</span></a>
+  <a href="#marcas"><span class="dot"></span><span class="label">Marcas</span></a>
+  <a href="#impact"><span class="dot"></span><span class="label">Impacto</span></a>
+  <a href="#experience"><span class="dot"></span><span class="label">Experiencia</span></a>
 </nav>
 
 <section class="hero" id="home">
+  <video class="hero-video" src="media/videos/landing/showcase-extendido-web.mp4" autoplay muted loop playsinline></video>
   <canvas id="nodeCanvas"></canvas>
-  <div class="hero-eyebrow mono">AI Creative &amp; Video Producer — Reynosa, MX</div>
+  <div class="hero-eyebrow mono">Marketing &amp; Creative Lead · AI Video Producer — Reynosa, MX</div>
   <h1>Edmundo<br>Cavazos</h1>
-  <p class="role">Genero, dirijo y edito video con IA de principio a fin — de un prompt a una pieza terminada. Este es un muestrario de mi mejor trabajo.</p>
+  <p class="role">Construyo marcas de punta a punta: identidad, sitio web, diseño de producto, campañas y video con IA — de un prompt a una pieza terminada. Este es un muestrario de mi trabajo.</p>
+  <div class="hero-ctas">
+    <a class="btn primary" href="#videos">Ver videos →</a>
+    <a class="btn" href="#controlify">Caso Controlify</a>
+  </div>
   <div class="scroll-cue"><div class="bar"></div>Scroll</div>
 </section>
 
 <section id="skills">
   <span class="chapter-num mono">Skills</span>
-  <h2 class="title reveal">De la generación IA a la edición final.</h2>
-  <p class="lede reveal">Un mismo pipeline, de punta a punta: generación con modelos de IA, ensamblaje y post-producción profesional.</p>
+  <h2 class="title reveal">De la generación IA a la edición final — y al sitio web.</h2>
+  <p class="lede reveal">Un mismo pipeline, de punta a punta: estrategia, guion, generación con modelos de IA, post-producción profesional, diseño gráfico y desarrollo web.</p>
   <div class="stack-row reveal">
     <div class="stack-chip"><div class="mark" style="background:#3FA9E0;">Gr</div>Grok</div>
     <div class="stack-chip"><div class="mark" style="background:#E8860A;">Kl</div>Kling AI</div>
     <div class="stack-chip"><div class="mark" style="background:#9B6BD9;">Hf</div>Higgsfield</div>
+    <div class="stack-chip"><div class="mark" style="background:#D97757;">Cl</div>Claude</div>
     <div class="stack-chip"><div class="mark" style="background:#9999FF;">Ae</div>Adobe After Effects</div>
-    <div class="stack-chip"><div class="mark" style="background:#00005B;">Pr</div>Adobe Premiere Pro</div>
+    <div class="stack-chip"><div class="mark" style="background:#00005B; color:#9999FF;">Pr</div>Adobe Premiere Pro</div>
     <div class="stack-chip"><div class="mark" style="background:#31A8FF;">Ps</div>Adobe Photoshop</div>
     <div class="stack-chip"><div class="mark" style="background:#B4A7D6;">Me</div>Adobe Media Encoder</div>
+    <div class="stack-chip"><div class="mark" style="background:#EDEFF3;">▲</div>HTML / CSS · Vercel</div>
+    <div class="stack-chip"><div class="mark" style="background:#1877F2; color:#fff;">Ma</div>Meta Ads</div>
+  </div>
+</section>
+
+<section id="controlify">
+  <span class="chapter-num mono">Caso de estudio — Controlify</span>
+  <h2 class="title reveal">Todo lo que ves en controlifyapp.com lo hice yo.</h2>
+  <p class="lede reveal">Controlify es un sistema operativo para negocios — restaurantes, retail, multisucursal. Me encargué de la marca completa: el sitio web, la identidad, los íconos de cada módulo, las animaciones de producto, la fotografía, los anuncios y el contenido educativo.</p>
+
+  <div class="case-hero">
+    <div class="frame reveal"><video src="media/videos/landing/dashboard-loop.mp4" autoplay muted loop playsinline></video></div>
+    <ul class="deliverables reveal">
+      <li><span class="n">01</span><span><b>Landing page completa</b> — copy, diseño, desarrollo y deploy, con secciones por módulo, precios, testimoniales y FAQ.</span></li>
+      <li><span class="n">02</span><span><b>Identidad de marca</b> — logo, paleta, tipografía y mascota (Controly).</span></li>
+      <li><span class="n">03</span><span><b>Sistema de íconos</b> — un ícono 3D por cada módulo del producto.</span></li>
+      <li><span class="n">04</span><span><b>Animaciones de producto</b> — loops de cada módulo para web y redes.</span></li>
+      <li><span class="n">05</span><span><b>Fotografía con IA</b> — talento por puesto operativo (cocinero, mesero, hostess, bartender).</span></li>
+      <li><span class="n">06</span><span><b>Campañas, ads y showcases</b> — de awareness a conversión, horizontal y vertical.</span></li>
+      <li><span class="n">07</span><span><b>Academia Controlify</b> — tutoriales por módulo para clientes.</span></li>
+    </ul>
+  </div>
+
+  <h3 class="sub-h reveal">Animaciones de producto</h3>
+  <p class="sub-p reveal">Cada módulo tiene su propio loop: así lo explica la landing sin que nadie tenga que leer.</p>
+  <div class="loop-grid" id="loopGrid"></div>
+
+  <h3 class="sub-h reveal">Sistema de íconos por módulo</h3>
+  <div class="icon-row reveal" id="iconRow"></div>
+
+  <h3 class="sub-h reveal">Fotografía y talento con IA</h3>
+  <p class="sub-p reveal">Retratos por puesto operativo, generados y retocados para que cada persona del equipo se vea en el producto.</p>
+  <div class="photo-row reveal">
+    <img src="media/imagenes/landing/foto-cocinero-webpage.png" alt="Cocinero — fotografía con IA" loading="lazy">
+    <img src="media/imagenes/landing/foto-mesero-webpage.jpg" alt="Mesero — fotografía con IA" loading="lazy">
+    <img src="media/imagenes/landing/foto-hostess-webpage.png" alt="Hostess — fotografía con IA" loading="lazy">
+    <img src="media/imagenes/landing/foto-bartender-webpage.png" alt="Bartender — fotografía con IA" loading="lazy">
+  </div>
+</section>
+
+<section id="videos">
+  <span class="chapter-num mono">Videos</span>
+  <h2 class="title reveal">Producción de video con IA, de guion a corte final.</h2>
+  <p class="lede reveal">Showcases, spots, contenido UGC, anuncios verticales y tutoriales. Haz clic en cualquier video para verlo.</p>
+  <div class="filters" id="videoFilters"></div>
+  <div class="video-grid" id="videoGrid"></div>
+</section>
+
+<section id="diseno">
+  <span class="chapter-num mono">Diseño gráfico</span>
+  <h2 class="title reveal">Campañas, redes y material comercial.</h2>
+  <p class="lede reveal">Anuncios por módulo, calendario de contenido, presentaciones de venta, fichas técnicas y brandbooks.</p>
+  <div class="filters" id="imageFilters"></div>
+  <div class="masonry" id="imageGrid"></div>
+</section>
+
+<section id="marcas">
+  <span class="chapter-num mono">Marcas</span>
+  <h2 class="title reveal">Las marcas que he construido.</h2>
+  <p class="lede reveal">Desde la identidad hasta el lanzamiento: logo, sitio, campañas y contenido.</p>
+  <div class="brand-grid">
+    <div class="brand-card reveal">
+      <div class="logo light"><img src="media/imagenes/marcas/images_controlify-nuevo-logo-1x-fondo-blanco-1.webp" alt="Controlify"></div>
+      <h3>Controlify</h3>
+      <p>Sistema operativo para negocios. Identidad, landing, íconos, animaciones, ads, showcases y Academia.</p>
+    </div>
+    <div class="brand-card reveal">
+      <div class="logo"><img src="media/imagenes/marcas/reclutaya_logoclaro.png" alt="ReclutaYa"></div>
+      <h3>ReclutaYa</h3>
+      <p>Plataforma de reclutamiento. Brandbook, kick-off, showcases de producto y campañas de lanzamiento.</p>
+    </div>
+    <div class="brand-card reveal">
+      <div class="logo"><img src="media/imagenes/marcas/integrity-logo-horizontal.png" alt="Integrity"></div>
+      <h3>Integrity Seguros</h3>
+      <p>Brandbook 2026, plan de marketing y contenido, guiones de video e imagen generada con IA.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-h reveal">Negocios que confían en el trabajo</h3>
+  <div class="clients reveal">
+    <img src="media/imagenes/clientes/spexia.png" alt="Spexia" loading="lazy">
+    <img src="media/imagenes/clientes/jacal.png" alt="Jacal" loading="lazy">
+    <img src="media/imagenes/clientes/yaqui.png" alt="Grupo Yaqui" loading="lazy">
+    <img src="media/imagenes/clientes/la-llorona.png" alt="La Llorona" loading="lazy">
+    <img src="media/imagenes/clientes/noble.png" alt="Noble" loading="lazy">
+    <img src="media/imagenes/clientes/nectar.png" alt="El Néctar Nacional" loading="lazy">
   </div>
 </section>
 
@@ -178,43 +326,31 @@
   <p class="lede reveal">Ocho años construyendo comunicación de marca — primero en una manufacturera global, hoy liderando el marketing y la producción de contenido con IA de un SaaS.</p>
 
   <div class="stats-bar reveal">
-    <div class="stat-tile">
-      <div class="stat-num" id="statYears">–</div>
-      <div class="stat-label">Años en marketing &amp; comunicación (Corning + Controlify)</div>
-    </div>
-    <div class="stat-tile">
-      <div class="stat-num">2</div>
-      <div class="stat-label">Marcas — una manufacturera global, un SaaS en crecimiento</div>
-    </div>
-    <div class="stat-tile">
-      <div class="stat-num" id="statVideos">–</div>
-      <div class="stat-label">Piezas de video en este showcase (generación IA + edición)</div>
-    </div>
-    <div class="stat-tile">
-      <div class="stat-num">7</div>
-      <div class="stat-label">Herramientas activas en el pipeline de producción</div>
-    </div>
+    <div class="stat-tile"><div class="stat-num" id="statYears">–</div><div class="stat-label">Años en marketing &amp; comunicación (Corning + Controlify)</div></div>
+    <div class="stat-tile"><div class="stat-num">3</div><div class="stat-label">Marcas construidas — Controlify, ReclutaYa, Integrity</div></div>
+    <div class="stat-tile"><div class="stat-num" id="statVideos">–</div><div class="stat-label">Videos en este portfolio (generación IA + edición)</div></div>
+    <div class="stat-tile"><div class="stat-num" id="statPieces">–</div><div class="stat-label">Piezas gráficas, íconos y animaciones de producto</div></div>
   </div>
 
   <div class="impact-grid">
     <div class="impact-col reveal">
       <h4>Tipo de trabajo</h4>
-      <ul class="impact-list">
+      <ul class="deliverables">
         <li><span class="n">01</span>Producción de video con IA — de guion a corte final</li>
         <li><span class="n">02</span>Branding e identidad visual</li>
-        <li><span class="n">03</span>Diseño gráfico y campañas digitales</li>
-        <li><span class="n">04</span>Cobertura de eventos y materiales corporativos</li>
+        <li><span class="n">03</span>Diseño y desarrollo de landing pages</li>
+        <li><span class="n">04</span>Diseño gráfico, campañas digitales y Meta Ads</li>
         <li><span class="n">05</span>Contenido educativo — Academia Controlify y demos de producto</li>
       </ul>
     </div>
     <div class="impact-col reveal">
       <h4>Flujo de trabajo</h4>
-      <ul class="impact-list">
-        <li><span class="n">01</span>Brief y guion</li>
+      <ul class="deliverables">
+        <li><span class="n">01</span>Brief, estrategia y guion</li>
         <li><span class="n">02</span>Generación con IA — Grok, Kling AI, Higgsfield</li>
         <li><span class="n">03</span>Ensamblaje y edición — Premiere Pro, After Effects</li>
         <li><span class="n">04</span>Revisión de marca y ajuste fino</li>
-        <li><span class="n">05</span>Publicación y entrega — Media Encoder</li>
+        <li><span class="n">05</span>Publicación, pauta y entrega — Media Encoder, Meta Ads</li>
       </ul>
     </div>
   </div>
@@ -222,47 +358,39 @@
 
 <section id="experience">
   <span class="chapter-num mono">Experiencia</span>
-  <h2 class="title reveal">Las marcas donde he construido esto.</h2>
+  <h2 class="title reveal">Dónde he construido esto.</h2>
   <p class="lede reveal">De comunicación corporativa en una manufacturera global a liderar marketing y contenido con IA en un SaaS.</p>
 
   <div class="exp-grid">
     <div class="exp-col reveal">
-      <div class="exp-company">
-        <h3>Corning</h3>
-        <span class="exp-dates">2018–2025</span>
-      </div>
+      <div class="exp-company"><h3>Corning</h3><span class="exp-dates">2018–2025</span></div>
       <p class="exp-role">Marketing &amp; Digital Communications / Corporate Communications</p>
       <p class="exp-bio">Lideré la creación de contenido visual y audiovisual para comunicación interna y externa, desarrollando branding, fotografía, video, diseño gráfico, campañas digitales, cobertura de eventos, materiales corporativos y proyectos de transformación digital para distintas áreas de la empresa.</p>
     </div>
-
     <div class="exp-col reveal">
-      <div class="exp-company">
-        <h3>Controlify</h3>
-        <span class="exp-dates">2025–Presente</span>
-      </div>
+      <div class="exp-company"><h3>Controlify</h3><span class="exp-dates">2025–Presente</span></div>
       <p class="exp-role">Marketing &amp; Creative Lead</p>
-      <p class="exp-bio">Responsable de la estrategia de marketing, identidad de marca, producción de contenido con IA, dirección creativa, campañas en redes sociales, diseño de producto y materiales comerciales, además del desarrollo de la Academia Controlify, demostraciones del producto, contenido educativo y apoyo en el posicionamiento y crecimiento comercial de la plataforma.</p>
-
-      <div class="video-grid compact" id="videoGrid"></div>
+      <p class="exp-bio">Responsable de la estrategia de marketing, identidad de marca, sitio web, producción de contenido con IA, dirección creativa, campañas en redes sociales, diseño de producto y materiales comerciales, además del desarrollo de la Academia Controlify, demostraciones del producto, contenido educativo y apoyo en el posicionamiento y crecimiento comercial de la plataforma. También lideré el lanzamiento de ReclutaYa.</p>
     </div>
   </div>
 </section>
 
-<section id="gallery">
-  <span class="chapter-num mono">Imágenes</span>
-  <h2 class="title reveal">Piezas visuales — próximamente.</h2>
-  <p class="lede reveal">Espacio reservado para fotografía, branding y diseño gráfico. Pasa el mouse por un cuadro.</p>
+<footer>
+  <span>Edmundo Cavazos — 2025–2026</span>
+  <a href="https://controlifyapp.com" target="_blank" rel="noopener">controlifyapp.com →</a>
+</footer>
 
-  <div class="image-grid reveal" id="imageGrid"></div>
-</section>
-
-<footer>Edmundo Cavazos — 2025–2026</footer>
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+  <div class="modal-inner" id="modalInner"></div>
+</div>
 
 <script>
 const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }); },{threshold:0.15});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const observeReveals = root => root.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+observeReveals(document);
 
-const sections = ['home','skills','impact','experience','gallery'];
+const sections = ['home','skills','controlify','videos','diseno','marcas','impact','experience'];
 const railLinks = document.querySelectorAll('.rail a');
 const secObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
@@ -272,7 +400,7 @@ const secObserver = new IntersectionObserver((entries)=>{
       if(railLinks[idx]) railLinks[idx].classList.add('active');
     }
   });
-},{threshold:0.5});
+},{threshold:0.2});
 sections.forEach(id=>{ const el=document.getElementById(id); if(el) secObserver.observe(el); });
 
 const canvas = document.getElementById('nodeCanvas');
@@ -294,40 +422,165 @@ function draw(){
 }
 draw();
 
-// Project data — dates are the file's actual creation dates
+// Product loops from the Controlify landing (media/videos/landing)
+const loops = [
+  ["dashboard-loop","Dashboard"],["horarios-loop","Horarios y asistencia"],["capacitacion-loop","Capacitación"],
+  ["checklist-loop","Checklists"],["auditar-evidencias-loop","Auditar evidencias"],["encuestas-loop","Encuestas"],
+  ["recordatorios-loop","Recordatorios"],["reportes-loop","Reportes"],["controlify-rewards-loop","Controlify Rewards"]
+];
+document.getElementById('loopGrid').innerHTML = loops.map(([f,l]) => `
+  <div class="loop reveal"><video data-src="media/videos/landing/${f}.mp4" muted loop playsinline preload="none"></video><span>${l}</span></div>`).join('');
+
+// Lazy-load and play loops only while visible
+const loopObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    const v = e.target;
+    if(e.isIntersecting){ if(!v.src) v.src = v.dataset.src; v.play().catch(()=>{}); }
+    else v.pause();
+  });
+},{threshold:0.25});
+document.querySelectorAll('#loopGrid video').forEach(v=>loopObserver.observe(v));
+
+const icons = [
+  ["dashboard-nuevo-icon","Dashboard"],["horarios-y-asistencias-icon","Horarios"],["capacitaciones-icon","Capacitaciones"],
+  ["checklist-icon","Checklists"],["auditar-evidencias-icon","Auditorías"],["encuestas-icon","Encuestas"],
+  ["recordatorios-icon","Recordatorios"],["permisos-icon","Permisos"],["proyeccion-y-salarios-icon","Salarios"],
+  ["capital-humano-icon","Capital humano"],["politicas-y-reglamentos-icon","Políticas"],["ubicacion-y-checkin-icon","Check-in"],
+  ["dias-festivos-y-horas-extra-icon","Horas extra"],["controlify-rewards-icon","Rewards"]
+];
+document.getElementById('iconRow').innerHTML = icons.map(([f,l]) => `
+  <figure><img src="media/imagenes/iconos/${f}.png" alt="${l}" loading="lazy"><figcaption>${l}</figcaption></figure>`).join('');
+
+// Videos — local copies in media/videos, Drive id as fallback when a file isn't present (large files aren't in git)
 const videos = [
-  { id:"1g71w7IIPJSTrrZxCRPwJsrYBVtquyzTQ", date:"26 Jun 2026", title:"Showcase — pieza integral", desc:"Video showcase de producto de formato largo: generación IA + edición narrativa completa.", tools:["Kling AI","Premiere Pro","Media Encoder"] },
-  { id:"18syBkdS_fe9yENvzbbnBQfTMGja-rHsi", date:"01 Jul 2026", title:"Spot publicitario B2B", desc:"Anuncio dirigido a audiencia empresarial. Guion, generación y corte final.", tools:["Grok","Kling AI","Premiere Pro"] },
-  { id:"1pHt7RHsECGaUGlpU7jz_s75Y5FcTCbnU", date:"09 Jul 2026", title:"Ad vertical 9:16", desc:"Pieza publicitaria vertical, narración en off, talento generado con IA.", tools:["Grok","Kling AI","Higgsfield","After Effects"] },
-  { id:"1boAF0N4H5OAmDWQIBzqXmLt1FpOXPLGi", date:"15 Jun 2026", title:"Showcase mensual", desc:"Corte de producto mostrando avances de una plataforma en uso real.", tools:["Kling AI","Premiere Pro"] },
-  { id:"1A-YGUfrG0ehHZiEPsq9G83kwEpeD6mfg", date:"15 Jun 2026", title:"Hook — apertura de campaña", desc:"Pieza corta de apertura para campañas de awareness en redes sociales.", tools:["Higgsfield","After Effects"] },
-  { id:"1nWPyLN_6QBjZJ91FbS79bZTGckQWwwZX", date:"12 May 2026", title:"Promo corta", desc:"Promoción ágil de producto, formato optimizado para pauta paga.", tools:["Kling AI","Premiere Pro"] },
-  { id:"1kM3micveZR-HAsXwtnm1j9GqQFfGQw0o", date:"11 Jun 2026", title:"Video de lanzamiento", desc:"Pieza de anuncio / lanzamiento, tono narrativo y ritmo de reveal.", tools:["Grok","Kling AI","After Effects"] },
-  { id:"1mTADh7ciyJdsPOxR_hslj0P-rr3D4u_4", date:"09 Jul 2026", title:"Intro de módulo educativo", desc:"Apertura de contenido instruccional en formato de video corto.", tools:["Higgsfield","Premiere Pro"] }
+  { f:"controlify-showcase-todo-negocio", id:"1g71w7IIPJSTrrZxCRPwJsrYBVtquyzTQ", cat:"Showcases", brand:"Controlify", date:"Jun 2026", title:"Showcase — Controlify para todo negocio", desc:"Showcase de producto de formato largo: generación IA + edición narrativa completa.", tools:["Kling AI","Premiere Pro","Media Encoder"] },
+  { f:"controlify-ad-empresas", id:"18syBkdS_fe9yENvzbbnBQfTMGja-rHsi", cat:"Ads", brand:"Controlify", date:"Jul 2026", title:"Spot publicitario B2B", desc:"Anuncio dirigido a audiencia empresarial. Guion, generación y corte final.", tools:["Grok","Kling AI","Premiere Pro"] },
+  { f:"controlify-multisucursal", id:"1U0CJEp0GsQGZpGmArcll-Y8cDACJMmtr", cat:"Ads", brand:"Controlify", date:"Sep 2026", title:"Multisucursal", desc:"Campaña para cadenas: control de todas las sucursales desde un solo lugar.", tools:["Grok","Kling AI","Premiere Pro"] },
+  { f:"controlify-ad-vertical-9x16", id:"1pHt7RHsECGaUGlpU7jz_s75Y5FcTCbnU", cat:"Ads", brand:"Controlify", date:"Jul 2026", title:"Ad vertical 9:16", desc:"Pieza publicitaria vertical, narración en off, talento generado con IA.", tools:["Grok","Kling AI","Higgsfield","After Effects"] },
+  { f:"controlify-pdv-vertical", id:"1VHX1GT4EhiJVMJdMoGKR90XBfnl0T4p1", cat:"Ads", brand:"Controlify", date:"Jul 2026", title:"Punto de venta — vertical", desc:"Anuncio vertical del módulo de punto de venta para Reels y TikTok.", tools:["Kling AI","Premiere Pro"] },
+  { f:"controlify-influencer-reportes", id:"1yhGGsjSaUoi8H5D9J3AVvnWG0wmy_Mp5", cat:"UGC", brand:"Controlify", date:"Jul 2026", title:"Influencer IA — Reportes", desc:"Formato influencer con talento generado por IA explicando el módulo de reportes.", tools:["Higgsfield","Premiere Pro"] },
+  { f:"ugc-reportes", id:"1qAVl3iGPX4GQP6AVBd281lzdhXJpZMP9", cat:"UGC", brand:"Controlify", date:"Jul 2026", title:"UGC — Reportes", desc:"Contenido estilo creador para pauta: problema, solución y CTA en segundos.", tools:["Higgsfield","Premiere Pro"] },
+  { f:"ugc-checklist", id:"1u5fuxrGckJydVmV1Az1mvP4tMMtpwaFI", cat:"UGC", brand:"Controlify", date:"Jul 2026", title:"UGC — Checklists", desc:"Serie UGC por módulo para campañas de conversión.", tools:["Higgsfield","Premiere Pro"] },
+  { f:"ugc-nominas", id:"1YvGmLZ-C7eP7AqycSjdteY9Ka8JK6pU6", cat:"UGC", brand:"Controlify", date:"Jul 2026", title:"UGC — Nóminas", desc:"Serie UGC por módulo para campañas de conversión.", tools:["Higgsfield","Premiere Pro"] },
+  { f:"ugc-capacitaciones", id:"1dzQ_NAlbssK6Qhvr1KHH5XpXVdv8gP2R", cat:"UGC", brand:"Controlify", date:"Jul 2026", title:"UGC — Capacitaciones", desc:"Serie UGC por módulo para campañas de conversión.", tools:["Higgsfield","Premiere Pro"] },
+  { f:"controlify-respondio-mini-showcase", id:"1YxJPpEfVmU-0qFmK_zlnTroZm6Zm0wLk", cat:"Showcases", brand:"Controlify", date:"Jun 2026", title:"Mini showcase", desc:"Versión corta del showcase para redes y WhatsApp.", tools:["Premiere Pro","After Effects"] },
+  { f:"controlify-intro-ya-llego", id:"1kM3micveZR-HAsXwtnm1j9GqQFfGQw0o", cat:"Motion", brand:"Controlify", date:"Jun 2026", title:"“Ya llegó Controlify” — lanzamiento", desc:"Pieza de anuncio / lanzamiento, tono narrativo y ritmo de reveal.", tools:["Grok","Kling AI","After Effects"] },
+  { f:"controlify-hook-kickoff", id:"1A-YGUfrG0ehHZiEPsq9G83kwEpeD6mfg", cat:"Motion", brand:"Controlify", date:"Jun 2026", title:"Hook — apertura de campaña", desc:"Pieza corta de apertura para campañas de awareness en redes sociales.", tools:["Higgsfield","After Effects"] },
+  { f:"controlify-minimalista-modulos-vertical", id:"1Ej2k3fWLlFwdUC0eL5GyiaIvJJESRisy", cat:"Motion", brand:"Controlify", date:"Jun 2026", title:"Módulos — minimalista vertical", desc:"Motion graphics limpio recorriendo los módulos del producto.", tools:["After Effects"] },
+  { f:"solucion-dashboard", id:"1G2YtA9OPRzpm2-SBnmC8Try8ujIYRQHr", cat:"Soluciones", brand:"Controlify", date:"Jul 2026", title:"Solución — Dashboard", desc:"Serie “Solución”: un dolor del negocio y cómo lo resuelve cada módulo.", tools:["Kling AI","Premiere Pro"] },
+  { f:"solucion-reportes", id:"175eZVcIepdX5KvOTtPWoT6KazJTEjgIG", cat:"Soluciones", brand:"Controlify", date:"Jul 2026", title:"Solución — Reportes", desc:"Serie “Solución”: un dolor del negocio y cómo lo resuelve cada módulo.", tools:["Kling AI","Premiere Pro"] },
+  { f:"solucion-auditorias", id:"1edIxhMSc1_3qBPfpicqSBRviM-zatRX1", cat:"Soluciones", brand:"Controlify", date:"Jul 2026", title:"Solución — Auditorías", desc:"Serie “Solución”: un dolor del negocio y cómo lo resuelve cada módulo.", tools:["Kling AI","Premiere Pro"] },
+  { f:"solucion-capacitaciones", id:"1d13hNW9RW6jFEFHBJFVAspCvY4OYFVaM", cat:"Soluciones", brand:"Controlify", date:"Jul 2026", title:"Solución — Capacitaciones", desc:"Serie “Solución”: un dolor del negocio y cómo lo resuelve cada módulo.", tools:["Kling AI","Premiere Pro"] },
+  { f:"solucion-checklist", id:"15shgjextBOY6vu_qMNkPdQ5nd2_jCL3K", cat:"Soluciones", brand:"Controlify", date:"Jun 2026", title:"Solución — Checklists", desc:"Serie “Solución”: un dolor del negocio y cómo lo resuelve cada módulo.", tools:["Kling AI","Premiere Pro"] },
+  { f:"solucion-horarios-nominas", id:"12bIFVNyz86nKYA_yhwylRVfiPClA32Vk", cat:"Soluciones", brand:"Controlify", date:"Jul 2026", title:"Solución — Horarios y nóminas", desc:"Serie “Solución”: un dolor del negocio y cómo lo resuelve cada módulo.", tools:["Kling AI","Premiere Pro"] },
+  { f:"cristal-checklist", id:"1bnry7tLNJ8mv5kXxZyntzjLo7ojTz6p7", cat:"Motion", brand:"Controlify", date:"Jul 2026", title:"Cristal — Checklists", desc:"Serie de motion con estética glassmorphism por módulo.", tools:["After Effects"] },
+  { f:"cristal-capacitaciones", id:"1bTGvV9H5-fM08aMytp43q8UIbE5axVoD", cat:"Motion", brand:"Controlify", date:"Jul 2026", title:"Cristal — Capacitaciones", desc:"Serie de motion con estética glassmorphism por módulo.", tools:["After Effects"] },
+  { f:"cristal-horarios", id:"1etRPML-OJqHSC7wJWquYgO7uEfJaGYVI", cat:"Motion", brand:"Controlify", date:"Jul 2026", title:"Cristal — Horarios", desc:"Serie de motion con estética glassmorphism por módulo.", tools:["After Effects"] },
+  { f:"cristal-reportes", id:"1POFLEFVRM6FT6qPzMVl7Pm4LwYQFOIC1", cat:"Motion", brand:"Controlify", date:"Jul 2026", title:"Cristal — Reportes", desc:"Serie de motion con estética glassmorphism por módulo.", tools:["After Effects"] },
+  { f:"academia-tutorial-intro", id:"1mTADh7ciyJdsPOxR_hslj0P-rr3D4u_4", cat:"Academia", brand:"Controlify", date:"Jul 2026", title:"Academia — intro de módulo", desc:"Apertura de contenido instruccional en formato de video corto.", tools:["Higgsfield","Premiere Pro"] },
+  { f:"academia-tutorial-checklist", id:"1Q1sgRjZhA7z4Bp028et9__LdYmg6_iaq", cat:"Academia", brand:"Controlify", date:"Jul 2026", title:"Academia — Tutorial de checklists", desc:"Tutorial paso a paso del módulo para clientes nuevos.", tools:["Premiere Pro","After Effects"] },
+  { f:"reclutaya-showcase-vacante-gratis", id:"1-E5WeTwfxrV1XxtWhgggQYxGh4pfxBYS", cat:"ReclutaYa", brand:"ReclutaYa", date:"Sep 2026", title:"Showcase — tu primera vacante gratis", desc:"Showcase de producto para la campaña de lanzamiento con oferta de entrada.", tools:["Kling AI","Premiere Pro"] },
+  { f:"reclutaya-showcase-vertical", id:"1TKyxS5aiIcR7C-J4LktAlBNEUKq0RcjQ", cat:"ReclutaYa", brand:"ReclutaYa", date:"Sep 2026", title:"Showcase vertical", desc:"Versión vertical del showcase para Reels, TikTok y WhatsApp.", tools:["Kling AI","Premiere Pro"] },
+  { f:"reclutaya-kickoff", id:"1sBEHUYstG28UnABXntQyq9GUsl9lLVkC", cat:"ReclutaYa", brand:"ReclutaYa", date:"Sep 2026", title:"Kick-off de marca", desc:"Video de arranque de la marca: el problema de reclutar y la promesa de ReclutaYa.", tools:["Grok","Kling AI","Premiere Pro"] },
+  { f:"reclutaya-dolor", id:"1ZoYbOIWdVtK-dSydBnMTIcb7wmkkE9KA", cat:"ReclutaYa", brand:"ReclutaYa", date:"Sep 2026", title:"El dolor de reclutar", desc:"Ad basado en el dolor del cliente, pensado para el primer segundo de atención.", tools:["Grok","Kling AI","Premiere Pro"] },
+  { f:"reclutaya-reloj", id:"18HFEKxbeZhi6XmG4ADfKNZeJ3Si1ljOi", cat:"ReclutaYa", brand:"ReclutaYa", date:"Sep 2026", title:"Contra reloj", desc:"Pieza sobre el tiempo perdido en procesos de reclutamiento.", tools:["Kling AI","After Effects"] },
+  { f:"reclutaya-80w", id:"1avb0t3OuE5Zsktte_kP3-I23ZQP3ByTG", cat:"ReclutaYa", brand:"ReclutaYa", date:"Sep 2026", title:"Spot de campaña", desc:"Spot de campaña para pauta en Meta.", tools:["Kling AI","Premiere Pro"] }
 ];
 
 const grid = document.getElementById('videoGrid');
-grid.innerHTML = videos.map(v => `
-  <div class="vcard">
+grid.innerHTML = videos.map((v,i) => `
+  <button class="vcard reveal" data-cat="${v.cat}" data-i="${i}">
     <div class="vthumb">
-      <img src="https://drive.google.com/thumbnail?id=${v.id}&sz=w800" alt="${v.title}" loading="lazy" onerror="this.style.display='none'">
+      <img src="media/videos/posters/${v.f}.jpg" alt="${v.title}" loading="lazy" onload="if(this.naturalHeight>this.naturalWidth){this.classList.add('vertical');this.nextElementSibling.nextElementSibling.textContent='9:16';}" onerror="this.src='https://drive.google.com/thumbnail?id=${v.id}&sz=w800'">
       <div class="play"><svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="11" fill="rgba(11,18,32,0.55)"/><path d="M9.5 7.5v9l8-4.5z"/></svg></div>
+      <span class="fmt">16:9</span>
     </div>
     <div class="vbody">
-      <div class="meta"><span class="date">${v.date}</span></div>
+      <div class="meta"><span class="brand">${v.brand} · ${v.cat}</span><span class="date">${v.date}</span></div>
       <h4>${v.title}</h4>
       <p>${v.desc}</p>
       <div class="tool-tags">${v.tools.map(t=>`<span>${t}</span>`).join('')}</div>
-      <a class="watch" href="https://drive.google.com/file/d/${v.id}/view" target="_blank" rel="noopener">Ver video completo →</a>
     </div>
-  </div>
+  </button>
 `).join('');
 
+function buildFilters(containerId, items, cards){
+  const cats = [...new Set(items.map(x=>x.cat))];
+  const el = document.getElementById(containerId);
+  el.innerHTML = ['Todos',...cats].map((c,i)=>{
+    const n = c==='Todos' ? items.length : items.filter(x=>x.cat===c).length;
+    return `<button class="filter-btn${i===0?' active':''}" data-cat="${c}">${c}<span class="count">${n}</span></button>`;
+  }).join('');
+  el.addEventListener('click', e=>{
+    const b = e.target.closest('.filter-btn'); if(!b) return;
+    el.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    cards().forEach(c=>c.classList.toggle('hidden', b.dataset.cat!=='Todos' && c.dataset.cat!==b.dataset.cat));
+  });
+}
+buildFilters('videoFilters', videos, ()=>grid.querySelectorAll('.vcard'));
+
+const images = [
+  { f:"dashboard-ad.jpg", cat:"Ads", t:"Dashboard — tu negocio siempre a la vista" },
+  { f:"checklist-ad.jpg", cat:"Ads", t:"Checklists" },
+  { f:"horarios-ad.jpg", cat:"Ads", t:"Horarios" },
+  { f:"capacitaciones-ad.jpg", cat:"Ads", t:"Capacitaciones" },
+  { f:"reportes-ad.jpg", cat:"Ads", t:"Reportes" },
+  { f:"encuestas-ad.jpg", cat:"Ads", t:"Encuestas" },
+  { f:"nominas-ad.jpg", cat:"Ads", t:"Nóminas" },
+  { f:"recordatorios-ad.jpg", cat:"Ads", t:"Recordatorios" },
+  { f:"ad-controlify-carrusel.jpg", cat:"Ads", t:"Carrusel de módulos" },
+  { f:"digitaliza-tu-operacion.jpg", cat:"Ads", t:"Digitaliza tu operación" },
+  { f:"1-con-ago-lunesdashboard-controlify.jpg", cat:"Redes", t:"Calendario — lunes de dashboard" },
+  { f:"2-con-ago-martes-testimonial.jpg", cat:"Redes", t:"Calendario — martes de testimonial" },
+  { f:"3-con-ago-miercoles-controlify-pos.jpg", cat:"Redes", t:"Calendario — miércoles POS" },
+  { f:"jueves-no-vendemos-software-controlify.jpg", cat:"Redes", t:"“No vendemos software” — jueves" },
+  { f:"viernes-no-vendemos-software-controlify.jpg", cat:"Redes", t:"“No vendemos software” — viernes" },
+  { f:"recordatorios-post-ia.jpg", cat:"Redes", t:"Post de módulo con arte IA" },
+  { f:"template-social-media-controlify.jpg", cat:"Redes", t:"Template de redes sociales" },
+  { f:"portada-venta-controlify.jpg", cat:"Comercial", t:"Presentación de venta — portada" },
+  { f:"que-es-controlify-venta.jpg", cat:"Comercial", t:"Presentación de venta — qué es" },
+  { f:"como-funciona-controlify-venta.jpg", cat:"Comercial", t:"Presentación de venta — cómo funciona" },
+  { f:"ficha-tecnica-controlify-1.jpg", cat:"Comercial", t:"Ficha técnica" },
+  { f:"celular-controlify.jpg", cat:"Comercial", t:"Mockup de producto" },
+  { f:"reclutaya-brandbook.png", cat:"Branding", t:"ReclutaYa — Brandbook" },
+  { f:"landing/controly-robot.png", cat:"Branding", t:"Controly — mascota de marca" },
+  { f:"landing/crear-nuevo-negocio-1.png", cat:"Producto", t:"Onboarding — crear negocio" },
+  { f:"landing/crear-nuevo-negocio-3.png", cat:"Producto", t:"Onboarding — configuración" },
+  { f:"landing/crear-nuevo-negocio-6.png", cat:"Producto", t:"Onboarding — listo" }
+];
+const imageGrid = document.getElementById('imageGrid');
+imageGrid.innerHTML = images.map(im => `
+  <figure data-cat="${im.cat}" data-src="media/imagenes/${im.f}" data-t="${im.t}">
+    <img src="media/imagenes/${im.f}" alt="${im.t}" loading="lazy">
+    <figcaption><span>${im.t}</span><span class="cat">${im.cat}</span></figcaption>
+  </figure>`).join('');
+buildFilters('imageFilters', images, ()=>imageGrid.querySelectorAll('figure'));
+
+// Modal
+const modal = document.getElementById('modal'), inner = document.getElementById('modalInner');
+function openModal(html){ inner.innerHTML = html; modal.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(){ modal.classList.remove('open'); inner.innerHTML=''; document.body.style.overflow=''; }
+document.getElementById('modalClose').onclick = closeModal;
+modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+grid.addEventListener('click', e=>{
+  const card = e.target.closest('.vcard'); if(!card) return;
+  const v = videos[card.dataset.i];
+  openModal(`<video class="modal-media" src="media/videos/${v.f}.mp4" controls autoplay playsinline></video>
+    <div class="modal-caption"><b>${v.title}</b> — ${v.desc}</div>`);
+  inner.querySelector('video').addEventListener('error', ()=>{
+    inner.querySelector('video').outerHTML = `<iframe class="modal-media iframe" src="https://drive.google.com/file/d/${v.id}/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  }, {once:true});
+});
+const zoom = (src,t) => openModal(`<img class="modal-media" src="${src}" alt="${t}"><div class="modal-caption"><b>${t}</b></div>`);
+imageGrid.addEventListener('click', e=>{ const f = e.target.closest('figure'); if(f) zoom(f.dataset.src, f.dataset.t); });
+document.querySelectorAll('.photo-row img').forEach(img=>img.addEventListener('click', ()=>zoom(img.src, img.alt)));
+
+observeReveals(document);
 document.getElementById('statYears').textContent = (new Date().getFullYear() - 2018) + '+';
 document.getElementById('statVideos').textContent = videos.length;
-
-const imageGrid = document.getElementById('imageGrid');
-imageGrid.innerHTML = Array.from({length:8}).map(() => `<div class="img-placeholder"></div>`).join('');
+document.getElementById('statPieces').textContent = (images.length + icons.length + loops.length) + '+';
 </script>
 
 </body>

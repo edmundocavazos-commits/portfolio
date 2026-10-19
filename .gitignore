@@ -1,1 +1,5 @@
 .vercel
+
+# Copias locales de los videos de Drive (2.5 GB). La página los reproduce desde Google Drive si no están.
+# Se publican solo los posters y los loops de la landing.
+/media/videos/*.mp4
