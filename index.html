@@ -183,9 +183,10 @@
   @media (max-width:900px){ .impact-grid{grid-template-columns:1fr;} }
 
   /* experience */
-  .exp-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; margin-top:56px; align-items:start;}
+  .exp-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; margin-top:56px; align-items:start;}
   .exp-col{padding:0 44px;}
-  .exp-col:first-child{padding-left:0; border-right:1px solid var(--line);}
+  .exp-col:first-child{padding-left:0;}
+  .exp-col:not(:last-child){border-right:1px solid var(--line);}
   .exp-col:last-child{padding-right:0;}
   .exp-company{display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap;}
   .exp-company h3{font-size:22px; font-weight:600;}
@@ -195,7 +196,7 @@
   @media (max-width:900px){
     .exp-grid{grid-template-columns:1fr;}
     .exp-col{padding:0;}
-    .exp-col:first-child{border-right:none; border-bottom:1px solid var(--line); padding-bottom:40px; margin-bottom:40px;}
+    .exp-col:not(:last-child){border-right:none; border-bottom:1px solid var(--line); padding-bottom:40px; margin-bottom:40px;}
   }
 
   footer{padding:40px 8vw; font-size:12px; color:var(--muted-dark); border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
@@ -476,9 +477,14 @@
 <section id="experience">
   <span class="chapter-num mono">Experiencia</span>
   <h2 class="title reveal">Dónde he construido esto.</h2>
-  <p class="lede reveal">De comunicación corporativa en una manufacturera global a liderar marketing y contenido con IA en un SaaS.</p>
+  <p class="lede reveal">Hago marketing desde los 15 años: de una organización de 6,000 personas por semana a la comunicación corporativa de una manufacturera global, y hoy a liderar marketing, contenido y ventas con IA en una agencia de software.</p>
 
   <div class="exp-grid">
+    <div class="exp-col reveal">
+      <div class="exp-company"><h3>Iglesia Alianza Reynosa</h3><span class="exp-dates">2015–2018</span></div>
+      <p class="exp-role">Marketing y producción audiovisual</p>
+      <p class="exp-bio">Mi primera experiencia en marketing, desde los 15 años, en una organización con una asistencia de unas 6,000 personas por semana: campañas de marketing y comunicación, proyectos audiovisuales (video, fotografía y diseño) y conferencias de marketing como Merka 2.0.</p>
+    </div>
     <div class="exp-col reveal">
       <div class="exp-company"><h3>Corning Optical Communications</h3><span class="exp-dates">2018–2025</span></div>
       <p class="exp-role">Communications Auxiliary — Comunicación corporativa (2020–2025) · RH / Reclutamiento (2018–2019)</p>
