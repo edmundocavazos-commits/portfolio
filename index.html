@@ -157,6 +157,15 @@
   .brand-card h3{font-size:19px; font-weight:600;}
   .brand-card p{font-size:13.5px; color:var(--muted); line-height:1.6;}
   @media (max-width:900px){ .brand-grid{grid-template-columns:1fr;} }
+  .web-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:56px;}
+  .web-card{display:block; background:var(--navy-2); border:1px solid var(--line); border-radius:16px; overflow:hidden; text-decoration:none; color:inherit; transition:border-color .2s, transform .2s;}
+  .web-card:hover{border-color:var(--blue-bright); transform:translateY(-3px);}
+  .web-card img{display:block; width:100%; aspect-ratio:16/10; object-fit:cover; object-position:top;}
+  .web-card div{padding:18px 22px;}
+  .web-card h3{font-size:18px; font-weight:600;}
+  .web-card p{font-size:13.5px; color:var(--muted); line-height:1.6; margin-top:6px;}
+  .web-card span{display:inline-block; margin-top:10px; font-size:12.5px; color:var(--blue-bright);}
+  @media (max-width:900px){ .web-grid{grid-template-columns:1fr;} }
   .clients{display:flex; flex-wrap:wrap; align-items:center; gap:40px 56px; margin-top:32px; padding:32px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .socials{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:6px;}
   .socials a{font-size:11.5px; font-family:'JetBrains Mono',monospace; color:var(--blue-bright); text-decoration:none; border:1px solid var(--line); border-radius:100px; padding:5px 12px;}
@@ -224,6 +233,7 @@
   <a href="#controlify"><span class="dot"></span><span class="label">Caso Controlify</span></a>
   <a href="#videos"><span class="dot"></span><span class="label">Videos</span></a>
   <a href="#diseno"><span class="dot"></span><span class="label">Diseño</span></a>
+  <a href="#web"><span class="dot"></span><span class="label">Sitios web</span></a>
   <a href="#marcas"><span class="dot"></span><span class="label">Marcas</span></a>
   <a href="#impact"><span class="dot"></span><span class="label">Impacto</span></a>
   <a href="#experience"><span class="dot"></span><span class="label">Experiencia</span></a>
@@ -392,6 +402,18 @@
   <div class="masonry" id="imageGrid"></div>
 </section>
 
+<section id="web">
+  <span class="chapter-num mono">Diseño web</span>
+  <h2 class="title reveal">Sitios que diseñé y publiqué.</h2>
+  <p class="lede reveal">Landing pages y sitios completos, del diseño al código y la publicación (HTML, Next.js, Supabase, Vercel). Haz clic para verlos en vivo.</p>
+  <div class="web-grid">
+    <a class="web-card reveal" href="https://controlifyapp.com" target="_blank" rel="noopener"><img src="media/imagenes/web/controlify.jpg" alt="Landing de Controlify" loading="lazy"><div><h3>Controlify</h3><p>Landing del producto: identidad, animaciones, video y embudo hacia la demo.</p><span>controlifyapp.com ↗</span></div></a>
+    <a class="web-card reveal" href="https://reclutaya.com" target="_blank" rel="noopener"><img src="media/imagenes/web/reclutaya.jpg" alt="Sitio de ReclutaYa" loading="lazy"><div><h3>ReclutaYa</h3><p>Sitio de lanzamiento: más de 2,100 visitas con Meta Ads a MXN 0.55–1.21 por visita.</p><span>reclutaya.com ↗</span></div></a>
+    <a class="web-card reveal" href="https://controlify-solutions.vercel.app" target="_blank" rel="noopener"><img src="media/imagenes/web/solutions.jpg" alt="Sitio de Controlify Solutions" loading="lazy"><div><h3>Controlify Solutions</h3><p>Sitio de la agencia: productos, proyectos para clientes, bots y funnels.</p><span>controlify-solutions.vercel.app ↗</span></div></a>
+    <a class="web-card reveal" href="https://finanzas.controlifyapp.com" target="_blank" rel="noopener"><img src="media/imagenes/web/finanzas.jpg" alt="Controlify Finanzas" loading="lazy"><div><h3>Controlify Finanzas</h3><p>Interfaz web y móvil: corte de caja, egresos y flujo de caja.</p><span>finanzas.controlifyapp.com ↗</span></div></a>
+  </div>
+</section>
+
 <section id="marcas">
   <span class="chapter-num mono">Marcas</span>
   <h2 class="title reveal">Las marcas que he construido.</h2>
@@ -448,6 +470,12 @@
     <div class="stat-tile"><div class="stat-num" id="statVideos">–</div><div class="stat-label">Videos en este portfolio (generación IA + edición)</div></div>
     <div class="stat-tile"><div class="stat-num" id="statPieces">–</div><div class="stat-label">Piezas gráficas, íconos y animaciones de producto</div></div>
   </div>
+  <div class="stats-bar reveal" style="margin-top:0; border-top:0;">
+    <div class="stat-tile"><div class="stat-num">223</div><div class="stat-label">Leads en un mes con Meta Ads (Controlify + ReclutaYa, sep–oct 2026)</div></div>
+    <div class="stat-tile"><div class="stat-num">3K→50K</div><div class="stat-label">Seguidores en Facebook de Corning México durante mi etapa en comunicación</div></div>
+    <div class="stat-tile"><div class="stat-num">$0.55</div><div class="stat-label">MXN por visita a la landing de ReclutaYa en Meta Ads</div></div>
+    <div class="stat-tile"><div class="stat-num">6+</div><div class="stat-label">Personas lideradas: 2 practicantes, un equipo de 3–4 y la creadora de contenido de Controlify</div></div>
+  </div>
 
   <div class="impact-grid">
     <div class="impact-col reveal">
@@ -488,12 +516,12 @@
     <div class="exp-col reveal">
       <div class="exp-company"><h3>Corning Optical Communications</h3><span class="exp-dates">2018–2025</span></div>
       <p class="exp-role">Communications Auxiliary — Comunicación corporativa (2020–2025) · RH / Reclutamiento (2018–2019)</p>
-      <p class="exp-bio">Lideré la creación de contenido visual y audiovisual para comunicación interna y externa, desarrollando branding, fotografía, video, diseño gráfico, campañas digitales, cobertura de eventos, materiales corporativos y proyectos de transformación digital para distintas áreas de la empresa.</p>
+      <p class="exp-bio">Lideré la creación de contenido visual y audiovisual para comunicación interna y externa, desarrollando branding, fotografía, video, diseño gráfico, campañas digitales, cobertura de eventos, materiales corporativos y proyectos de transformación digital para distintas áreas de la empresa. Ayudé a crecer la página de Facebook de Corning México de unos 3 mil a unos 50 mil seguidores.</p>
     </div>
     <div class="exp-col reveal">
       <div class="exp-company"><h3>Controlify</h3><span class="exp-dates">2025–Presente</span></div>
       <p class="exp-role">Marketing &amp; Creative Lead</p>
-      <p class="exp-bio">Responsable de la estrategia de marketing, identidad de marca, sitio web, producción de contenido con IA, dirección creativa, campañas en redes sociales, diseño de producto y materiales comerciales, además del desarrollo de la Academia Controlify, demostraciones del producto, contenido educativo y apoyo en el posicionamiento y crecimiento comercial de la plataforma. También lideré el lanzamiento de ReclutaYa. En ventas, diseñé y opero el embudo completo: anuncios en Meta, bots y agentes de IA en WhatsApp y web que atienden 24/7, califican leads y agendan demos, y la venta consultiva que hago personalmente, con demos por videollamada, seguimiento y cierre.</p>
+      <p class="exp-bio">Responsable de la estrategia de marketing, identidad de marca, sitio web, producción de contenido con IA, dirección creativa, campañas en redes sociales, diseño de producto y materiales comerciales, además del desarrollo de la Academia Controlify, demostraciones del producto, contenido educativo y apoyo en el posicionamiento y crecimiento comercial de la plataforma. También lideré el lanzamiento de ReclutaYa. En ventas, diseñé y opero el embudo completo: anuncios en Meta, bots y agentes de IA en WhatsApp y web que atienden 24/7, califican leads y agendan demos, y la venta consultiva que hago personalmente, con demos por videollamada, seguimiento y cierre. Dirijo a la creadora de contenido e influencer de la marca: estrategia, guiones y dirección creativa.</p>
     </div>
   </div>
 </section>
